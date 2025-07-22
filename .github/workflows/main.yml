@@ -3,6 +3,13 @@ on: push
 jobs:
   my-job:
     runs-on: ubuntu-latest
+    environment: test
     steps:
     - name: step1
-      run: echo "helloworld!"
+      env:
+        mysecret : ${{ secrets.sec1 }}
+      run: |
+          echo "helloworld!"
+          if [ "$MYSECRET" = "testtest" ]; then
+            echo "In testing correct secret!"
+          fi
